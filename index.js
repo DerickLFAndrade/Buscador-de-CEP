@@ -2,21 +2,30 @@ function iniciar() {
     const buscarCep =  () => {
         const form = document.querySelector('[data-form]');
         const cp = document.querySelector('[data-cep]');
-
-        const cep = [] 
-       
-
         const rua = document.querySelector('[data-rua]');
         const bairro = document.querySelector('[data-bairro]');
         const cidade = document.querySelector('[data-cidade]');
         const estado = document.querySelector('[data-estado]');
+
+        let cep = '';
+        console.log(typeof cep);
+       
+
+
         cp.addEventListener('focus', () => {
             cp.placeholder = '';
 
          cp.addEventListener('input', ()=> {
-             cep.push(cp.value);
-             console.log(cep.length)
-             if (cep.length == 5)
+
+             cep = cp.value;
+             console.log(cp.value.length)
+            if(cep.length == 5) {
+                
+                console.log(cp.value.indexOf("-"))
+                cp.value = `${cp.value}-`
+
+           
+            }
              if (cp.value == false) {
 
                  rua.innerHTML = '';
@@ -33,10 +42,10 @@ function iniciar() {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-          
+           
+           
             const url = `https://viacep.com.br/ws/${cep}/json/`;
-            console.log(typeof cep);
-          
+           
             fetch(url).then(endereco => {
                 return endereco.json();
             }).then( endereco => {
