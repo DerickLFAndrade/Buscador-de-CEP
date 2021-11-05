@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="ico.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Buscador de CEP</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <span class="title">Buscador de CEP</span>
+        </nav>
+    </header>
+
+    <section class="container">
+
+
+        <form action="" class="forms" data-form> 
+
+            <section class="it-form-inp">
+                
+                <input type="text" maxlength="8" class="cep" data-cep required placeholder="ex 00000-000">
+                <label for="input" class="label-inp">Digite o CEP:</label>
+            </section>
+
+            <section class="it-form">
+                <label for="span" class="label">Logradouro:</label>
+                <span class="rua"data-rua></span>
+            </section>
+
+            <section class="it-form">
+                <label for="span" class="label">Bairro:</label>
+                <span class="bairro" data-bairro></span>
+            </section>
+
+            <section class="it-form">
+                <label for="span" class="label">Cidade:</label>
+                <span class="estado" data-cidade></span>
+            </section>
+
+            <section class="it-form">
+                <label for="span" class="label">Estado:</label>
+                <span class="estado" data-estado></span>
+            </section>
+           
+
+            <button class="button">Enviar</button>
+
+
+        </form>
+    </section>
+
+
+
+<footer>
+
+        <span class="texto">Obrigado Por utilizar esse aplicativo!</span>
+    
+</footer>
+
+
+<script src="index.js"></script>
+</body>
+
+</html>
