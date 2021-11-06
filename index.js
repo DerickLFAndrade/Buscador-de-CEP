@@ -11,41 +11,55 @@ function iniciar() {
       
        
         let armazenarStr = '';
-
+        
+      
  
         form.addEventListener('submit', (e) => {
             e.preventDefault();
            
-           
-           
-            const url = `https://viacep.com.br/ws/${cp.value}/json/`;
-           
-            fetch(url).then(endereco => {
-                return endereco.json();
-            }).then( endereco => {
-               
-                
-               
-                if (endereco.logradouro) {
-                   
-                    rua.innerHTML = endereco.logradouro;
-                    bairro.innerHTML = endereco.bairro;
-                    cidade.innerHTML = endereco.localidade;
-                    estado.innerHTML = endereco.uf;
-                   
-                    
-                }  else {
-                    alert("Digite um CEP válido");
-                    location.reload();
-                    
-                
 
-                } 
+            const nuns = /[a-z]/;
+            const result = nuns.test(cp.value)
+            if (result == false) {
+
+                const url = `https://viacep.com.br/ws/${cp.value}/json/`;
+
+                fetch(url).then(endereco => {
+                    return endereco.json();
+                }).then(endereco => {
 
 
+
+                    if (endereco.logradouro) {
+
+                        rua.innerHTML = `Logradouro - ${endereco.logradouro}`;
+                        bairro.innerHTML = ` Bairro - ${endereco.bairro}`;
+                        cidade.innerHTML = `Cidade - ${endereco.localidade}`;
+                        estado.innerHTML = `Estado - ${endereco.uf}`;
+
+
+                    }
+                    console.log(endereco)
+                     if(endereco.erro == true) {
+                        alert("Digite um CEP valido!");
+                        location.reload();
+
+
+
+                    }
+
+
+                }
+
+                );
+
+            } else {
+                alert("Digite um CEP válido");
+                location.reload();
             }
-      
-            );
+           
+           
+            
         });
 
         cp.addEventListener('focus', () => {
