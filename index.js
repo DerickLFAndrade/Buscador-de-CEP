@@ -18,13 +18,13 @@ function iniciar() {
          cp.addEventListener('input', ()=> {
 
              cep = cp.value;
-             console.log(cp.value.length)
-            if(cep.length == 5) {
-                
-                console.log(cp.value.indexOf("-"))
-                cp.value = `${cp.value}-`
+             //console.log(cp.value.length)
+             if (cep.length == 5 && cp.value.indexOf('-') == -1) {
 
-           
+                 console.log('Primeiro', cp.value.indexOf('-'), 'index e', cp.value.length)
+                cp.value = `${cp.value}-`
+            } else {
+                console.log('Segundo', cp.value.indexOf('-'),'index e',cp.value.length)
             }
              if (cp.value == false) {
 
