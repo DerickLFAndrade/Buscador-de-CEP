@@ -7,44 +7,18 @@ function iniciar() {
         const cidade = document.querySelector('[data-cidade]');
         const estado = document.querySelector('[data-estado]');
 
-        let cep = '';
-        console.log(typeof cep);
+      
+      
        
+        let armazenarStr = '';
 
-
-        cp.addEventListener('focus', () => {
-            cp.placeholder = '';
-
-         cp.addEventListener('input', ()=> {
-
-             cep = cp.value;
-             //console.log(cp.value.length)
-             if (cep.length == 5 && cp.value.indexOf('-') == -1) {
-
-                 console.log('Primeiro', cp.value.indexOf('-'), 'index e', cp.value.length)
-                cp.value = `${cp.value}-`
-            } else {
-                console.log('Segundo', cp.value.indexOf('-'),'index e',cp.value.length)
-            }
-             if (cp.value == false) {
-
-                 rua.innerHTML = '';
-                 bairro.innerHTML = '';
-                 cidade.innerHTML = '';
-                 estado.innerHTML = '';
-                 cp.addEventListener('focusout', () => {
-                     cp.placeholder = 'ex 00000-000';
-                 })
-             }
-         })
-           
-        })
+ 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-
            
            
-            const url = `https://viacep.com.br/ws/${cep}/json/`;
+           
+            const url = `https://viacep.com.br/ws/${cp.value}/json/`;
            
             fetch(url).then(endereco => {
                 return endereco.json();
@@ -53,6 +27,7 @@ function iniciar() {
                 
                
                 if (endereco.logradouro) {
+                   
                     rua.innerHTML = endereco.logradouro;
                     bairro.innerHTML = endereco.bairro;
                     cidade.innerHTML = endereco.localidade;
@@ -61,11 +36,9 @@ function iniciar() {
                     
                 }  else {
                     alert("Digite um CEP válido");
-                    cep = '';
-                    cp.focus();
-                    rua.innerHTML = '';
-                    bairro.innerHTML = '';
-                    estado.innerHTML = '';
+                    location.reload();
+                    
+                
 
                 } 
 
@@ -74,6 +47,39 @@ function iniciar() {
       
             );
         });
+
+        cp.addEventListener('focus', () => {
+            cp.placeholder = '';
+        });
+
+        cp.addEventListener('input', () => {
+
+
+            console.log(cp.value)
+            if (cp.value.length == 5 && cp.value.indexOf('-') == -1) {
+                armazenarStr = cp.value;
+                //console.log(cp.value.length)
+
+                cp.value = `${cp.value}-`
+            } else if (cp.value.length == 6 && cp.value.indexOf('-') == 5) {
+
+
+                //   console.log(armazenarStr, cp.value.indexOf('-'))
+                cp.value = armazenarStr;
+            }
+            if (cp.value == false) {
+                armazenarStr = ''
+                console.log(cp.value, armazenarStr, cp.value.indexOf('-'))
+                cp.focus();
+                rua.innerHTML = '';
+                bairro.innerHTML = '';
+                cidade.innerHTML = '';
+                estado.innerHTML = '';
+                cp.addEventListener('focusout', () => {
+                    cp.placeholder = 'ex 00000-000';
+                })
+            }
+        })
        
 
     };
